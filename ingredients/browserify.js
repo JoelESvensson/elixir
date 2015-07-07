@@ -111,11 +111,13 @@ elixir.extend('browserify', function(src, output, baseDir, options) {
     var search = '/**/*.+(js|jsx|babel)';
 
     baseDir = baseDir || elixir.config.assetsDir + 'js';
+    options = options || {};
+    options.debug = options.debug || elixir.config.sourcemaps;
 
     elixir.config.saveTask('browserify', {
         src: utilities.buildGulpSrc(src, './' + baseDir, search),
         destination: getDestination(output || this.jsOutput),
-        options: options || {}
+        options: options
     });
 
     buildTask();
